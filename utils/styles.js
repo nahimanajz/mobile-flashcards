@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
         marginTop: 23
     },
     button:{
-        backgroundColor:color.pink,
+        
         height: 40,
         width: 300,
         borderRadius: 8,
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
         borderColor:color.pink,
         height: 40,
         width: 300,
-        textAlign: 'left',
+        paddingLeft: 4,
         marginTop: 20
     },
     btnText: {
@@ -41,8 +41,28 @@ export const styles = StyleSheet.create({
         fontSize:32,
         textAlign: 'center'
     },
+    subtitle:{
+     color: color.textBlack,
+     fontSize:18,
+     textAlign: 'center'
+    },
     content: {
        padding: 23,
        paddingTop: 50
+    },
+    center:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
+    },
+    dashboard: {
+        backgroundColor:color.textBlack
+        
+    },
+    dash:{
+        padding: 10,
+        marginTop: 40
+        
+        
     }
 })

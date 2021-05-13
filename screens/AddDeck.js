@@ -1,14 +1,19 @@
 import React,{useEffect, useState} from "react"
-import {View, Text, TextInput, TouchableOpacity, Image} from 'react-native';
-import { styles } from "../utils/styles";
+import {View, Text, Image} from 'react-native'
+import { styles } from "../utils/styles"
 import{FontAwesome } from '@expo/vector-icons'
-import { EditText } from "../components/EditText";
+import { EditText } from "../components/EditText"
+import { SubmitButton } from "../components/SubmitButton"
+import { useNavigation } from '@react-navigation/native'
+import * as color from '../utils/colors'
 
-
-export function AddDeck(){
+export function AddDeck({navigation}){
     const [value, setValue] = useState();
     const submitInfo =() => {
         alert(value)
+        //TODO: Save this deck then redirect to deck detail page
+        //navigation.navigate("DeckDetail")
+        navigation.navigate("detail")
     }
 
     return (
@@ -18,12 +23,10 @@ export function AddDeck(){
             </View>
             <View style={styles.content}>
                 <Text style={styles.title}>What is the title of your New Deck ?</Text>
-                <EditText onChangeText={value=> setValue(value) }/>
+                <EditText onChangeText={value=> setValue(value) } />
             </View>
             <View>
-            <TouchableOpacity style={styles.button} onPress={submitInfo}>
-                    <Text style={styles.btnText}>Submit</Text>
-                </TouchableOpacity>
+                <SubmitButton onPress={submitInfo} label={'Create Deck'} color={`${color.pink}`}/>
             </View>
         </View>
     )

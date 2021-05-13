@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import{Ionicons,FontAwesome } from '@expo/vector-icons'
 
 import * as color from '../utils/colors';
+import { StackNavs } from './StackNavs';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,19 +24,18 @@ export default function BottomNavs() {
           }
           
         }}
+        
         >
         <Tab.Screen name="Decks" component={Dashboard} 
             options={{
               tabBarIcon: ({color, size})=><FontAwesome name="dashboard" size={35} color={color} />
           }}
         />
-        <Tab.Screen name="Add Decks" component={AddDeck} 
-        
-        options={{
-           tabBarLabel:"Add Decks",
+        <Tab.Screen name="stacks" component={StackNavs}         
+          options={{
+           tabBarLabel:"Add Deck",
             tabBarIcon: ({color, size})=><Ionicons name="md-add-circle-outline" size={40} color={color} />
-        }}
-        />
+        }} />
       </Tab.Navigator>
     </NavigationContainer>
     
