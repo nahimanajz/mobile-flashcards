@@ -6,13 +6,15 @@ import { EditText } from "../components/EditText"
 import { SubmitButton } from "../components/SubmitButton"
 import { useNavigation } from '@react-navigation/native'
 import * as color from '../utils/colors'
+import { saveDeck } from '../utils/data'
 
 export function AddDeck({navigation}){
     const [value, setValue] = useState();
     const submitInfo =() => {
-        alert(value)
+        
         //TODO: Save this deck then redirect to deck detail page
-        //navigation.navigate("DeckDetail")
+        saveDeck(value)
+        //navigation.navigate("DeckDetail",{key: value})
         navigation.navigate("detail")
     }
 
