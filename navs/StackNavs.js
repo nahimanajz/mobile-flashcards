@@ -10,6 +10,7 @@ import { Forbidden } from '../screens/Forbidden';
 const Stack = createStackNavigator();
 //Todo: these are nested routes regarding to how screen follows each other,
 export const StackNavs =() =>{
+    
 return(
  
     <Stack.Navigator  

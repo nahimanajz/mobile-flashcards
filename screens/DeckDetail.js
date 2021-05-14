@@ -4,7 +4,7 @@ import { SubmitButton } from '../components/SubmitButton'
 import { styles } from '../utils/styles'
 import * as color from '../utils/colors'
 
-export function DeckDetail ({navigation}){
+export function DeckDetail ({route, navigation}){
     // Todo deck has title and
     // delete button
     // button to start a quiz
@@ -18,11 +18,13 @@ export function DeckDetail ({navigation}){
         navigation.navigate('forbidden')
     }
     //length of cards assigned to it
+    
+    const { title,questions } = route && route.params;
     return(
         <View style={styles.container}>
             <View>
-                <Text style={styles.title}> Deck 1 </Text>
-                <Text style={styles.subTitle}> 2 cards </Text>
+                <Text style={styles.title}> {title}</Text>
+                <Text style={styles.subtitle}> {questions} </Text>
             </View>
             <View>
                 <SubmitButton label={"Add card"} onPress={onAddCard}  color={`${color.darkPink}`}/>

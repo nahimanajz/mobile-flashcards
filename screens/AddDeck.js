@@ -11,11 +11,8 @@ import { saveDeck } from '../utils/data'
 export function AddDeck({navigation}){
     const [value, setValue] = useState();
     const submitInfo =() => {
-        
-        //TODO: Save this deck then redirect to deck detail page
         saveDeck(value)
-        //navigation.navigate("DeckDetail",{key: value})
-        navigation.navigate("detail")
+        navigation.navigate("Decks")
     }
 
     return (
