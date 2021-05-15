@@ -5,14 +5,18 @@ import { EditText } from "../components/EditText"
 import { SubmitButton } from "../components/SubmitButton"
 import { styles } from "../utils/styles"
 import * as color from '../utils/colors'
+import {addCardToDecks} from '../utils/data'
 
 
-export function AddCard(){
+
+export function AddCard({route}){
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState(null)
     const submitCard =()=> {
         const data = {answer, question}
-        alert(JSON.stringify(data))
+        addCardToDecks(route.params.deckTitle, data).then(data => {
+           console.log(data)
+        })
     }
     return (
         <View style={styles.container}>

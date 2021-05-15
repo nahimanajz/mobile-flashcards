@@ -83,17 +83,16 @@ export const getDeck= async (id)=>{
  * @return {Object} append question and it's answer to the chosen deck title
  */
  export const addCardToDecks = async (title, card)=>{
- const {question, answer} = card;
+ const { question, answer} = card;
+ try {
  const deck = {
      ...decks,
-    //decks[title]:{
-    [title]:{
+   [title]:{
     ...decks[title],
     questions: decks[title].questions.concat({question, answer})
     }
   }
-try {
-    return await AsyncStorage.mergeItem(STORAGE_KEY,deck)    
+    return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deck))
 } catch (error) {
     console.log(error)
 }

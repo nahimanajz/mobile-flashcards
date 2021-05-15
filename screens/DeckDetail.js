@@ -8,8 +8,10 @@ export function DeckDetail ({route, navigation}){
     // Todo deck has title and
     // delete button
     // button to start a quiz
+  
     const onAddCard =() =>{
-        navigation.navigate('AddCard')
+        
+        navigation.navigate('AddCard',{deckTitle: route.params.title})
     }
     const onDeleteDeck =() =>{
 
