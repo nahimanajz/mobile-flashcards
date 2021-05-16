@@ -21,21 +21,22 @@ export function Dashboard({navigation}){
         <ScrollView style={styles.dashboard}>
             {/* This is a list of decks */}
             {
-                data.map(({title, questions}) => (                  
-                <Card style={[styles.dash]} key={title}>
-                    <Text style={[styles.title]}>{title}</Text>
+                data.map((deck) => (                  
+                <Card style={[styles.dash]} key={deck.title}>
+                    <Text style={[styles.title]}>{deck.title}</Text>
                     <TouchableOpacity 
                         onPress={()=> navigation.navigate("stacks", {
                                     screen:'detail',
                                     initial:false,
                                     params:{
-                                        title,
-                                        questions: questions.length 
+                                        title:deck.title,
+                                        questions: deck.questions.length,
+                                        deck
                                         }
                                     })}
                                     >
 
-                <Text style={[styles.subtitle]}>{questions.length} Cards</Text>
+                <Text style={[styles.subtitle]}>{deck.questions.length} Cards</Text>
                     </TouchableOpacity>
                 </Card>
                 ))

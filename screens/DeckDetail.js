@@ -17,16 +17,18 @@ export function DeckDetail ({route, navigation}){
 
     }
     const onStartQuiz =() =>{
-        navigation.navigate('forbidden')
+       
+        navigation.navigate('forbidden',{questions: route.params.deck})
     }
     //length of cards assigned to it
     
-    const { title,questions } = route && route.params;
+    const { title,questions,deck } = route && route.params;
     return(
         <View style={styles.container}>
             <View>
                 <Text style={styles.title}> {title}</Text>
                 <Text style={styles.subtitle}> {questions} </Text>
+                <Text style={styles.subtitle}>  </Text>
             </View>
             <View>
                 <SubmitButton label={"Add card"} onPress={onAddCard}  color={`${color.darkPink}`}/>
