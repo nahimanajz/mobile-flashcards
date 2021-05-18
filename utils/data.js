@@ -92,9 +92,9 @@ export const getDeck= async (id)=>{
     questions: decks[title].questions.concat({question, answer})
     }
   }
-    return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deck))
+    return await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(deck))
 } catch (error) {
-    console.log(error)
+    console.log(`From add card api${error}`)
 }
  
  }
