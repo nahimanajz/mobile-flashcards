@@ -1,27 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, View } from "react-native"
 import { SubmitButton } from '../components/SubmitButton'
 import { styles } from '../utils/styles'
 import * as color from '../utils/colors'
+import {deleteDeck} from '../utils/data'
 
 export function DeckDetail ({route, navigation}){
-    // Todo deck has title and
-    // delete button
-    // button to start a quiz
-  
-    const onAddCard =() =>{
-        
+    const onAddCard =() =>{        
         navigation.navigate('AddCard',{deckTitle: route.params.title})
     }
-    const onDeleteDeck =() =>{
-
-    }
-    const onStartQuiz =() =>{
-       
+    const onStartQuiz =() =>{       
         navigation.navigate('forbidden',{questions: route.params.deck})
     }
-    //length of cards assigned to it
-    
+    const onDeleteDeck =(title) =>(
+        deleteDeck(title).then(deck=>{
+           navigation.navigate("detail")
+        }).catch(err => console.error(err))
+    )
+
     const { title,questions,deck } = route && route.params;
     return(
         <View style={styles.container}>
@@ -35,7 +31,7 @@ export function DeckDetail ({route, navigation}){
                 <SubmitButton label={"Start Quiz"} onPress={onStartQuiz} color={`${color.purple}`} />
             </View>
             <View>
-                <SubmitButton label={"Delete Quiz"} onPress={onDeleteDeck} color={`tomato`} />
+                <SubmitButton label={"Delete Quiz"} onPress={onDeleteDeck(title)} color={`tomato`} />
             </View>
         </View>
     )
