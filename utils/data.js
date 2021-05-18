@@ -84,17 +84,24 @@ export const getDeck= async (id)=>{
  */
  export const addCardToDecks = async (title, card)=>{
  const { question, answer} = card;
- try {
- const deck = {
-     ...decks,
-   [title]:{
-    ...decks[title],
-    questions: decks[title].questions.concat({question, answer})
+ const deck = getDecks().then((dks)=>{
+  //alert(JSON.stringify(dks[title].questions))
+  return (
+    {
+      ...dks,
+      [title]:{
+        questions: dks[title].questions.concat({question, answer})
+      }
     }
-  }
-    return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deck))
+  )
+  
+  })
+ try {
+ //const save = await AsyncStorage.setItem(STORAGE_KEY, deck)
+  alert(JSON.stringify(deck))
+    //return save;
 } catch (error) {
-    console.log(error)
+    console.log(`From add card APi: ${error}`)
 }
  
  }

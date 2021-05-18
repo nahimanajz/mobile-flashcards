@@ -10,11 +10,11 @@ export function Dashboard({navigation}){
   
     const[decks, setDecks] = useState({})
     useEffect(() =>{
-          getDecks().then(newDecks =>{
+        getDecks().then(newDecks =>{
               if(Object.keys(newDecks) !== Object.keys(decks)){
                 setDecks(newDecks)
               }
-          })
+          }).catch(err =>console.log(`From dashboard:${err.message}`))
     }, [decks])
     const data = Object.values(decks)
     return (
