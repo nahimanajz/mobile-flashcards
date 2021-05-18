@@ -94,9 +94,25 @@ export const getDeck= async (id)=>{
   )
   )
  try {
- const save = await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deck))
+ return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deck))
 } catch (error) {
     console.log(`From add card APi: ${error}`)
 }
- 
+ }
+
+  /**
+  * @param { String } title of deck w're going delete
+  * @description retreive all decks, delete chosen deck based on title, then save remaining decks
+  * @return promise with a query which deletes a question
+  */
+ export const deleteDeck = async (title)=>{
+  try {
+      const data = await getDecks()
+      delete data[title]
+      return await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+      
+  } catch (error) {
+    return console.log(error);
+  }
+  
  }

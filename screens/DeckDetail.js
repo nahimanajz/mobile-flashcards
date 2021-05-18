@@ -3,6 +3,7 @@ import { Text, View } from "react-native"
 import { SubmitButton } from '../components/SubmitButton'
 import { styles } from '../utils/styles'
 import * as color from '../utils/colors'
+import {deleteDeck} from '../utils/data'
 
 export function DeckDetail ({route, navigation}){
     // Todo deck has title and
@@ -13,14 +14,16 @@ export function DeckDetail ({route, navigation}){
         
         navigation.navigate('AddCard',{deckTitle: route.params.title})
     }
-    const onDeleteDeck =() =>{
-
+    const onDeleteDeck =(title) =>{
+        deleteDeck(title).then(deck=>{
+           // alert(JSON.stringify(decks))
+        })
     }
     const onStartQuiz =() =>{
        
         navigation.navigate('forbidden',{questions: route.params.deck})
     }
-    //length of cards assigned to it
+   
     
     const { title,questions,deck } = route && route.params;
     return(
@@ -35,7 +38,7 @@ export function DeckDetail ({route, navigation}){
                 <SubmitButton label={"Start Quiz"} onPress={onStartQuiz} color={`${color.purple}`} />
             </View>
             <View>
-                <SubmitButton label={"Delete Quiz"} onPress={onDeleteDeck} color={`tomato`} />
+                <SubmitButton label={"Delete Quiz"} onPress={onDeleteDeck(title)} color={`tomato`} />
             </View>
         </View>
     )
