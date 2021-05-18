@@ -12,7 +12,7 @@ export function AddDeck({navigation}){
     const [value, setValue] = useState();
     const submitInfo =() => {
         saveDeck(value)
-        navigation.navigate("Decks")
+        navigation.navigate("stacks",{screen: 'detail', params:{title:value,questions: 0}})
     }
 
     return (

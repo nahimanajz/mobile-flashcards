@@ -8,25 +8,31 @@ export function Forbidden({route}){
     let [count, setCount] = useState(0)
     const [deck] = useState(route.params.questions)
     const countDeckQuestion = deck.questions.length 
+    const changeQuestion =() => count === countDeckQuestion-1 ?setCount(0):setCount(count+1)
+    
+    return (<View style={styles.content}>
+            
 
-    // useEffect(()=> countDeckQuestion>=count&&count, [count])
-    return (
-        <View style={styles.content}>
-            <View>
-                <Text>{count}/ {countDeckQuestion}</Text>
-            </View>
-            <View style={styles.content}>
-                <Text style={styles.title}>
-                        {!deck?
-                                `Sorry You can not take a quiz because there is no cards`
-                        :
-                         count <= countDeckQuestion-1 && deck.questions[count].question
-                        }
-                    </Text>
-                    <Text style={[styles.subtitle,{color:'tomato', paddingTop:18}]}>Answer</Text>
-                    <SubmitButton onPress={()=>setCount(count+1)} label="Correct" color={`${color.textBlack}`}/>
-                    <SubmitButton onPress={()=>setCount(count+1)} label="Incorrect" color={`tomato`}/>
-            </View>
+            {(deck && deck.questions.length) ? (
+                <>
+                    <View>
+                        <Text>{count+1}/ {countDeckQuestion}</Text>
+                    </View>
+                    <View style={styles.content}> 
+                        <Text  style={styles.title}>
+                            {count <= countDeckQuestion-1 && deck.questions[count].question}
+                        </Text>               
+                        <Text style={[styles.subtitle,{color:'tomato', paddingTop:18}]}>Answer</Text>
+                        <SubmitButton onPress={changeQuestion} label="Correct" color={`${color.textBlack}`}/>
+                        <SubmitButton onPress={changeQuestion} label="Incorrect" color={`tomato`}/>
+                    </View>
+                </>
+            ):(
+                <Text  style={styles.title}>
+                       Sorry You can not take a quiz because there is no cards
+                </Text> 
+            )}
+            
                 
         </View>
     )

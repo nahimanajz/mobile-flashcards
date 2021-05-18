@@ -9,13 +9,13 @@ import {addCardToDecks} from '../utils/data'
 
 
 
-export function AddCard({route}){
+export function AddCard({navigation, route}){
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState(null)
     const submitCard =()=> {
         const data = {answer, question}
         addCardToDecks(route.params.deckTitle, data).then(data => {
-           console.log(data)
+           navigation.goBack()
         })
     }
     return (

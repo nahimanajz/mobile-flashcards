@@ -6,7 +6,6 @@ import {Card} from 'react-native-shadow-cards'
 import {getDecks} from '../utils/data'
 
 export function Dashboard({navigation}){
-    // TODO: When a user click on deck he must be redirected to deck detail
   
     const[decks, setDecks] = useState({})
     useEffect(() =>{
@@ -19,7 +18,7 @@ export function Dashboard({navigation}){
     const data = Object.values(decks)
     return (
         <ScrollView style={styles.dashboard}>
-            {/* This is a list of decks */}
+            
             {
                 data.map((deck) => (                  
                 <Card style={[styles.dash]} key={deck.title}>
