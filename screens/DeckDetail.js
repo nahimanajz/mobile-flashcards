@@ -12,11 +12,11 @@ export function DeckDetail ({route, navigation}){
     const onStartQuiz =() =>{       
         navigation.navigate('forbidden',{questions: route.params.deck})
     }
-    const onDeleteDeck =(title) =>(
-        deleteDeck(title).then(deck=>{
+    const onDeleteDeck =  (title) =>{
+         deleteDeck(title).then(deck=>{
            navigation.navigate("detail")
         }).catch(err => console.error(err))
-    )
+    }
 
     const { title,questions,deck } = route && route.params;
     return(
@@ -31,7 +31,7 @@ export function DeckDetail ({route, navigation}){
                 <SubmitButton label={"Start Quiz"} onPress={onStartQuiz} color={`${color.purple}`} />
             </View>
             <View>
-                <SubmitButton label={"Delete Quiz"} onPress={onDeleteDeck(title)} color={`tomato`} />
+                <SubmitButton label={"Delete Quiz"} onPress={()=>onDeleteDeck(title)} color={`tomato`} />
             </View>
         </View>
     )
