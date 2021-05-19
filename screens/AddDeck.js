@@ -22,7 +22,7 @@ export function AddDeck({navigation}){
             </View>
             <View style={styles.content}>
                 <Text style={styles.title}>What is the title of your New Deck ?</Text>
-                <EditText onChangeText={value=> setValue(value) } />
+                <EditText onChangeText={value=> setValue(value) } type='default'/>
             </View>
             <View>
                 <SubmitButton onPress={submitInfo} label={'Create Deck'} color={`${color.pink}`}/>

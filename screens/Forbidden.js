@@ -5,6 +5,8 @@ import { styles } from "../utils/styles"
 import * as color from '../utils/colors'
 
 export function Forbidden({route}){
+    const[showAnswer, setShowAnswer] = useState(false) 
+
     let [count, setCount] = useState(0)
     const [deck] = useState(route.params.questions)
     const countDeckQuestion = deck.questions.length 
@@ -20,9 +22,13 @@ export function Forbidden({route}){
                     </View>
                     <View style={styles.content}> 
                         <Text  style={styles.title}>
-                            {count <= countDeckQuestion-1 && deck.questions[count].question}
+                            {count <= countDeckQuestion-1 && (showAnswer?deck.questions[count].question: deck.questions[count].answer )}
                         </Text>               
-                        <Text style={[styles.subtitle,{color:'tomato', paddingTop:18}]}>Answer</Text>
+                        
+                        <SubmitButton onPress={()=> setShowAnswer(!showAnswer)} 
+                            style={[styles.subtitle,{color:'tomato', paddingTop:18}]}
+                            label={showAnswer? 'Answer': 'question'}
+                            color={`${color.darkPink}`}/>
                         <SubmitButton onPress={changeQuestion} label="Correct" color={`${color.textBlack}`}/>
                         <SubmitButton onPress={changeQuestion} label="Incorrect" color={`tomato`}/>
                     </View>

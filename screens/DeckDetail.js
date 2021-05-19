@@ -6,7 +6,7 @@ import * as color from '../utils/colors'
 import {deleteDeck} from '../utils/data'
 
 export function DeckDetail ({route, navigation}){
-    const[ showAnswer, setShowAnswer] = useSelector(false)
+    
     //TODO: Show answer, calculate point of user who did a quiz
     const onAddCard =() =>{        
         navigation.navigate('AddCard',{deckTitle: route.params.title})
