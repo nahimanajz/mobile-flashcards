@@ -15,7 +15,7 @@ export default function BottomNavs() {
     <NavigationContainer style={{backgroundColor:color.purple}}>
         <Tab.Navigator 
         initialRouteName='Dashboard'
-        tabBarOptions={{
+        tabBarOptions={{          
           activeTintColor:color.pink,        
           labelPosition:'below-icon',
           labelStyle:{
@@ -33,6 +33,7 @@ export default function BottomNavs() {
         />
         <Tab.Screen name="stacks" component={StackNavs}         
           options={{
+           
            tabBarLabel:"Add Deck",
             tabBarIcon: ({color, size})=><Ionicons name="md-add-circle-outline" size={40} color={color} />
         }} />

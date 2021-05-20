@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
     },
     glass: {
         backgroundColor: 'rgba(255,255,255,0.14)',
-        marginTop: 23
+        marginTop: 23,
+        
     },
     button:{
         

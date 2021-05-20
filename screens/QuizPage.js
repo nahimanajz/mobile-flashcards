@@ -5,7 +5,7 @@ import { styles } from "../utils/styles"
 import * as color from '../utils/colors'
 import ResultPage from "./ResultPage"
 
-export function Forbidden({route}){
+export function QuizPage({route}){
     const[showAnswer, setShowAnswer] = useState(false) 
     const [correctAnswer, setCorrectAnswer] = useState(0)
     const [incorrectAnswer, setIncorrectAnswer] = useState(0)

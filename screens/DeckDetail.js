@@ -12,7 +12,7 @@ export function DeckDetail ({route, navigation}){
         navigation.navigate('AddCard',{deckTitle: route.params.title})
     }
     const onStartQuiz =() =>{       
-        navigation.navigate('forbidden',{questions: route.params.deck})
+        navigation.navigate('Quiz',{questions: route.params.deck})
     }
     const onDeleteDeck =  (title) =>{
          deleteDeck(title).then(deck=>{
