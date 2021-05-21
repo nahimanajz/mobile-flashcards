@@ -5,6 +5,7 @@
  * Schedule notification after 3 hours
  * 
  *  */ 
+/*
  export  function notification(){
     Notifications.setNotificationHandler({
         handleNotification: async ()=>({
@@ -32,3 +33,4 @@
  function nextTrigger (){
   return Notifications.getNextTriggerDateAsync({hour: 3, minute:1})
  }
+ */

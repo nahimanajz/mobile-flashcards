@@ -7,7 +7,7 @@ import BottomNavs from './navs/BottomNavs'
 import { notification } from './utils/notification'
 
 export default function App() {
-  useEffect(() =>notification())
+  //useEffect(() =>notification())
   return (
     <View style={{flex: 1}}>
       <SafeAreaProvider>         

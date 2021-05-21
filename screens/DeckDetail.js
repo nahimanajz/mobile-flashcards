@@ -13,7 +13,7 @@ export function DeckDetail ({route, navigation}){
     }
     const onStartQuiz =() =>{       
         navigation.navigate('Quiz',{questions: route.params.deck})
-    }
+    } 
     const onDeleteDeck =  (title) =>{
          deleteDeck(title).then(deck=>{
            navigation.navigate("detail")
