@@ -6,13 +6,19 @@ import { EditText } from "../components/EditText"
 import { SubmitButton } from "../components/SubmitButton"
 import { useNavigation } from '@react-navigation/native'
 import * as color from '../utils/colors'
-import { saveDeck } from '../utils/data'
+import { getDeck, saveDeck } from '../utils/data'
 
 export function AddDeck({navigation}){
-    const [value, setValue] = useState();
+    const [deck, setDeck] = useState({title:''});
+    
     const submitInfo =() => {
-        saveDeck(value)
-        navigation.navigate("stacks",{screen: 'detail', params:{title:value,questions: 0}})
+        const {title, questions} = deck
+        saveDeck(title).then(()=>{
+            setDeck(title)
+            navigation.navigate("stacks",{screen: 'detail', params:{title,questions:questions.length}})
+
+        }).catch(err =>console.log(err))
+    
     }
 
     return (
@@ -22,7 +28,7 @@ export function AddDeck({navigation}){
             </View>
             <View style={styles.content}>
                 <Text style={styles.title}>What is the title of your New Deck ?</Text>
-                <EditText onChangeText={value=> setValue(value) } type='default'/>
+                <EditText onChangeText={title=> setDeck({title,questions:[{answer:'', question:''}]}) } type='default'/>
             </View>
             <View>
                 <SubmitButton onPress={submitInfo} label={'Create Deck'} color={`${color.pink}`}/>

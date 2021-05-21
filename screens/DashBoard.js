@@ -20,8 +20,7 @@ export function Dashboard({navigation}){
     }, [decks])
     const data = Object.values(decks)
     return (
-        <ScrollView style={styles.dashboard}>
-            
+        <ScrollView style={styles.dashboard}>            
             {
                 data.map((deck) => (                  
                 <Card style={[styles.dash]} key={deck.title}>
@@ -30,9 +29,7 @@ export function Dashboard({navigation}){
                         onPress={()=> navigation.navigate("stacks", {
                                     screen:'detail',
                                     initial:false,
-                                    params:{
-                                        title:deck.title,
-                                        questions: deck.questions.length,
+                                    params:{                                        
                                         deck
                                         }
                                     })}

@@ -44,11 +44,11 @@ try {
 /**
 
  * @Description { get all decks} 
- * @param { String } id of the deck 
+ * @param { String } id of the deck hast to be the title
  * @return { Object } chosen deck
  */
 export const getDeck= async (id)=>{
-   // ({deck: decks[id]})
+
    try {
          const data = await AsyncStorage.getItem(STORAGE_KEY)
          return data[id]

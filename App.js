@@ -7,7 +7,7 @@ import BottomNavs from './navs/BottomNavs'
 import { notification } from './utils/notification'
 
 export default function App() {
-  //useEffect(() =>notification())
+  //useEffect(() =>notification()) //NRoticiation will popup only if user logged no data at that day
   return (
     <View style={{flex: 1}}>
       <SafeAreaProvider>         

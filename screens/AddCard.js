@@ -7,16 +7,18 @@ import { styles } from "../utils/styles"
 import * as color from '../utils/colors'
 import {addCardToDecks} from '../utils/data'
 
-
-
 export function AddCard({navigation, route}){
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState(null)
+
     const submitCard =()=> {
-        const data = {answer, question}
-        addCardToDecks(route.params.deckTitle, data).then(data => {
-           navigation.goBack()
-        })
+
+    const card = {answer, question}  
+    addCardToDecks(route.params.deckTitle, card).then(data => {
+       route.params.updateCard(card)
+       
+   }).catch(err=>alert(JSON.stringify(err)))
+
     }
     return (
         <View style={styles.container}>
