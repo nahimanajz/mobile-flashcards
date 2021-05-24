@@ -8,56 +8,52 @@ import {deleteDeck} from '../utils/data'
 export function DeckDetail ({route, navigation}){
     
     //TODO: Show answer, Calculate Point of User who did a Quiz
-    const [cards, setCards] = useState(route.params.deck)
-    const [newCard, setNewCard] = useState(null)
+    const [deck, setDeck] = useState(route.params.deck)
 
-    const { deck } = route && route.params
-    // alert(JSON.stringify(deck))
-    const {title, questions} = deck && deck
-    
-    useEffect(()=>{
-        if(route.params.card){
-            setNewCard(route.params.card)                 
-            setCards({
-            ...cards,
-            [cards.title]:{
-                questions: cards.questions.concat(newCard)
-            }
+    const {title, questions} = deck
+   useEffect(()=>{           
+        if(route.params.card){       
+          setDeck({
+            ...deck,                    
+                questions: deck.questions.concat(route.params.card)
         })
         }
-    },[newCard, cards])
-   
-    const onAddCard =() =>{        
+   },[route.params.card])
+    const onAddCard =() =>{     
+        //set hook in this funtion 
         navigation.navigate('AddCard',{
-            deckTitle: route.params.deck.title,
-              
-       })
+            deckTitle: title, 
+       }) 
     }
     const onStartQuiz =() =>{       
-        navigation.navigate('Quiz',{questions: route.params.deck})
+        navigation.navigate('Quiz',{questions: deck})
     } 
     const onDeleteDeck =  (title) =>{
-         deleteDeck(title).then(deck=>{
+         deleteDeck(title).then(deck=>{            
            navigation.goBack()
         }).catch(err => console.error(err))
-    }
-
-  
-  
-    return(
-        <View style={styles.container}>
-            <View>
-                 <Text style={styles.title}> {title}</Text>
-                <Text style={styles.subtitle}> {questions.length} </Text>
-                
+       
+    }   
+    return(<>
+        {
+            title &&(
+                <View style={styles.container}>            
+                    <View>
+                        <Text style={styles.title}> {title} </Text>
+                        <Text style={styles.subtitle}> {questions? questions.length: 0} </Text>
+                        
+                    </View>
+                    <View>
+                        <SubmitButton label={"Add card"} onPress={onAddCard}  color={`${color.darkPink}`}/>
+                        <SubmitButton label={"Start Quiz"} onPress={onStartQuiz} color={`${color.purple}`} />
+                    </View>
+                    <View>
+                        <SubmitButton label={"Delete Quiz"} onPress={()=>onDeleteDeck(title)} color={`tomato`} />
+                    </View>
             </View>
-            <View>
-                <SubmitButton label={"Add card"} onPress={onAddCard}  color={`${color.darkPink}`}/>
-                <SubmitButton label={"Start Quiz"} onPress={onStartQuiz} color={`${color.purple}`} />
-            </View>
-            <View>
-                <SubmitButton label={"Delete Quiz"} onPress={()=>onDeleteDeck(title)} color={`tomato`} />
-            </View>
-        </View>
+            ) 
+            }
+        
+    </>
     )
 }

@@ -12,13 +12,13 @@ export function AddCard({navigation, route}){
   const [answer, setAnswer] = useState(null)
 
     const submitCard =()=> {
-
+    
     const card = {answer, question}  
     addCardToDecks(route.params.deckTitle, card).then(data => {
-       //route.params.updateCard(card)
+   
       navigation.navigate("detail", { card: card})
 
-   }).catch(err=>alert(JSON.stringify(err)))
+   }).catch(err=>alert(JSON.stringify(`From add card: ${err}`)))
     }
     return (
         <View style={styles.container}>
@@ -28,7 +28,7 @@ export function AddCard({navigation, route}){
             </View>
             <View />
             <View>
-                <SubmitButton onPress={submitCard} label={"Save card"} color={color.darkPink} />
+                <SubmitButton onPress={submitCard} label={"Save card"} color={color.darkPink} disabled={!Boolean(question && answer)}/>
             </View>
         </View>
     )

@@ -19,28 +19,27 @@ export function Dashboard({navigation}){
           }).catch(err =>console.log(`From dashboard:${err.message}`))
     }, [decks])
     const data = Object.values(decks)
+    
     return (
         <ScrollView style={styles.dashboard}>            
             {
-                data.map((deck) => (                  
-                <Card style={[styles.dash]} key={deck.title}>
-                    <Text style={[styles.title]}>{deck.title}</Text>
-                    <TouchableOpacity 
-                        onPress={()=> navigation.navigate("stacks", {
-                                    screen:'detail',
-                                    initial:false,
-                                    params:{                                        
-                                        deck
-                                        }
-                                    })}
-                                    >
-
-                <Text style={[styles.subtitle]}>{deck.questions.length} Cards</Text>
+                 data.map((deck) => deck && (                  
+                <Card style={[styles.dash]}>
+                    <Text style={[styles.title]} key={deck.title}>{deck.title}</Text>
+                        <TouchableOpacity 
+                            onPress={()=> navigation.navigate("stacks", {
+                                        screen:'detail',
+                                        initial:false,
+                                        params:{                                        
+                                            deck
+                                            }
+                                        })}
+                                        >
+                        <Text style={[styles.subtitle]}>{deck.questions.length} Cards</Text>
                     </TouchableOpacity>
                 </Card>
                 ))
             }
-            
         </ScrollView>
     )
 }

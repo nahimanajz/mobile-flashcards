@@ -5,7 +5,8 @@ import * as color from '../utils/colors'
 import { DeckDetail } from '../screens/DeckDetail'
 import { AddDeck } from '../screens/AddDeck'
 import { AddCard } from '../screens/AddCard'
-import { QuizPage } from '../screens/QuizPage';
+import { QuizPage } from '../screens/QuizPage'
+import ResultPage from '../screens/ResultPage'
 
 const Stack = createStackNavigator();
 //Todo: these are nested routes regarding to how screen follows each other,
@@ -26,7 +27,12 @@ return(
            component={AddCard} />
            <Stack.Screen 
            name="Quiz" 
-           component={QuizPage} />
+           component={QuizPage}
+            />
+            <Stack.Screen 
+           name="result" 
+           component={ResultPage}
+            />
         <Stack.Screen 
            name="detail" 
            component={DeckDetail} />

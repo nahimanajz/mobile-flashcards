@@ -5,13 +5,13 @@ import { styles } from "../utils/styles"
 import * as color from '../utils/colors'
 import ResultPage from "./ResultPage"
 
-export function QuizPage({route}){
+export function QuizPage({route, navigation}){
     const[showAnswer, setShowAnswer] = useState(false) 
     const [correctAnswer, setCorrectAnswer] = useState(0)
     const [incorrectAnswer, setIncorrectAnswer] = useState(0)
 
     let [count, setCount] = useState(0)
-    const [deck] = useState(route.params.questions)
+    const [deck, setDeck] = useState(route.params.questions)
     const countDeckQuestion = deck.questions.length 
     const changeQuestion =() => count === countDeckQuestion-1 ?setCount(0):setCount(count+1)
     
@@ -23,13 +23,25 @@ export function QuizPage({route}){
         changeQuestion() 
         return setIncorrectAnswer(countDeckQuestion-correctAnswer)
       }
+      
     if(correctAnswer + incorrectAnswer === countDeckQuestion){
-        return (
-            <ResultPage 
-                cp={correctAnswer * 100/ countDeckQuestion} 
-                ip={incorrectAnswer * 100/ countDeckQuestion} />
-        )
+        const correctPercentage = correctAnswer * 100/ countDeckQuestion
+        const incorrectPercentage = incorrectAnswer * 100/ countDeckQuestion
+        if(route.params.reset){
+            // setIncorrectAnswer(0)
+            // setCorrectAnswer(0)
+            setDeck(route.params.deck)
+            
+        }
+        if(incorrectAnswer!==0 || correctAnswer !==0){
+            navigation.navigate("stacks", { screen: 'result',params:{ 
+                correctPercentage,
+                incorrectPercentage,
+                deck:deck
+            }})
+        }
     }
+    
     return (<View style={styles.center}>            
 
             {(deck && deck.questions.length) ? (

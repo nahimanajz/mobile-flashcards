@@ -11,12 +11,11 @@ import { getDeck, saveDeck } from '../utils/data'
 export function AddDeck({navigation}){
     const [deck, setDeck] = useState({title:''});
     
-    const submitInfo =() => {
-        const {title, questions} = deck
-        saveDeck(title).then(()=>{
-            setDeck(title)
-            navigation.navigate("stacks",{screen: 'detail', params:{title,questions:questions.length}})
-
+    const submitInfo =() => { 
+        // Redirect To DECK CREATED WITH created deck  
+  
+        saveDeck(deck.title).then(()=>{            
+            navigation.navigate("stacks",{screen: 'detail', params:{deck}})
         }).catch(err =>console.log(err))
     
     }
@@ -28,10 +27,14 @@ export function AddDeck({navigation}){
             </View>
             <View style={styles.content}>
                 <Text style={styles.title}>What is the title of your New Deck ?</Text>
-                <EditText onChangeText={title=> setDeck({title,questions:[{answer:'', question:''}]}) } type='default'/>
+                <EditText onChangeText={title=> setDeck({...deck, title}) } type='default'/>
             </View>
             <View>
-                <SubmitButton onPress={submitInfo} label={'Create Deck'} color={`${color.pink}`}/>
+                <SubmitButton onPress={submitInfo} 
+                    label={'Create Deck'} 
+                    color={`${color.pink}`}
+                    disabled={!Boolean(deck.title)}
+                 />
             </View>
         </View>
     )

@@ -110,7 +110,7 @@ export const getDeck= async (id)=>{
       const dks = await getDecks()
       delete dks[title]
       return await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dks))
-      
+      q
   } catch (error) {
     return console.log("From delete database", error);
   }
