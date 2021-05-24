@@ -15,10 +15,10 @@ export function AddCard({navigation, route}){
 
     const card = {answer, question}  
     addCardToDecks(route.params.deckTitle, card).then(data => {
-       route.params.updateCard(card)
-       
-   }).catch(err=>alert(JSON.stringify(err)))
+       //route.params.updateCard(card)
+      navigation.navigate("detail", { card: card})
 
+   }).catch(err=>alert(JSON.stringify(err)))
     }
     return (
         <View style={styles.container}>

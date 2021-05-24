@@ -12,29 +12,25 @@ export function DeckDetail ({route, navigation}){
     const [newCard, setNewCard] = useState(null)
 
     const { deck } = route && route.params
-    const {title, questions} = deck
-
+    // alert(JSON.stringify(deck))
+    const {title, questions} = deck && deck
+    
     useEffect(()=>{
-
-        if(newCard){
-        //console.log(`card ${JSON.srtringify(cards.questions.concat(newCard))}`)
-        setCards({
+        if(route.params.card){
+            setNewCard(route.params.card)                 
+            setCards({
             ...cards,
             [cards.title]:{
                 questions: cards.questions.concat(newCard)
             }
         })
         }
-
     },[newCard, cards])
    
     const onAddCard =() =>{        
         navigation.navigate('AddCard',{
             deckTitle: route.params.deck.title,
-            updateCard: (card)=>{
-                   setNewCard(card)
               
-            }        
        })
     }
     const onStartQuiz =() =>{       
@@ -51,9 +47,9 @@ export function DeckDetail ({route, navigation}){
     return(
         <View style={styles.container}>
             <View>
-                <Text style={styles.title}> {title}</Text>
+                 <Text style={styles.title}> {title}</Text>
                 <Text style={styles.subtitle}> {questions.length} </Text>
-                <Text style={styles.subtitle}>  </Text>
+                
             </View>
             <View>
                 <SubmitButton label={"Add card"} onPress={onAddCard}  color={`${color.darkPink}`}/>

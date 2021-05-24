@@ -20,7 +20,7 @@ export function AddDeck({navigation}){
         }).catch(err =>console.log(err))
     
     }
-
+    //TODO: User clicks on add button should be taken to that deck detail
     return (
         <View style={styles.container}>
             <View>
