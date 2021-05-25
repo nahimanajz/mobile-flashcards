@@ -4,6 +4,11 @@ import { SubmitButton } from "../components/SubmitButton"
 import { styles } from "../utils/styles"
 import * as color from '../utils/colors'
 import ResultPage from "./ResultPage"
+      /**
+         * TODO: do a backend to keep solved questions [add timestamp, inorder to decide when to send notification]
+         *  Return result page if allquestions are corrected and append reset prop
+         * add n
+         */
 
 export function QuizPage({route, navigation}){
     const[showAnswer, setShowAnswer] = useState(false) 
@@ -12,6 +17,7 @@ export function QuizPage({route, navigation}){
 
     let [count, setCount] = useState(0)
     const [deck, setDeck] = useState(route.params.questions)
+    const [showResults, setShowResults] = useState(false)
     const countDeckQuestion = deck.questions.length 
     const changeQuestion =() => count === countDeckQuestion-1 ?setCount(0):setCount(count+1)
     
@@ -21,27 +27,46 @@ export function QuizPage({route, navigation}){
     }
     const handleIncorrectAnswer =() =>{
         changeQuestion() 
-        return setIncorrectAnswer(countDeckQuestion-correctAnswer)
+        if(count >= incorrectAnswer){
+            setIncorrectAnswer(incorrectAnswer+1)
+        }
       }
-      
-    if(correctAnswer + incorrectAnswer === countDeckQuestion){
-        const correctPercentage = correctAnswer * 100/ countDeckQuestion
-        const incorrectPercentage = incorrectAnswer * 100/ countDeckQuestion
-        if(route.params.reset){
-            // setIncorrectAnswer(0)
-            // setCorrectAnswer(0)
-            setDeck(route.params.deck)
-            
-        }
-        if(incorrectAnswer!==0 || correctAnswer !==0){
-            navigation.navigate("stacks", { screen: 'result',params:{ 
-                correctPercentage,
-                incorrectPercentage,
-                deck:deck
-            }})
-        }
+    const reset=()=>{
+        //setCount(0)
+        setShowResults(false)
+        setCorrectAnswer(0)
+         setIncorrectAnswer(0)
     }
-    
+    useEffect(()=>{    
+        
+        if(correctAnswer + incorrectAnswer === countDeckQuestion){
+            setShowResults(true)
+            // Set Result in backend
+            // Finaly check if user logged no data then retrieve notification
+            // {
+            //     deck:
+            //     result:[
+            //         correct?.integer, 
+            //         incorrect?.integer
+            //         timestamp?.time:
+            //     ]
+            // }
+        }
+        
+    },[count,incorrectAnswer, correctAnswer,showResults])
+      
+    if(showResults){
+                
+        return (
+            <ResultPage 
+                cp={correctAnswer * 100/ countDeckQuestion} 
+                ip={incorrectAnswer * 100/ countDeckQuestion} 
+                reset={reset}
+                />
+        )
+        
+    }
+
     return (<View style={styles.center}>            
 
             {(deck && deck.questions.length) ? (

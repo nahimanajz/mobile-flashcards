@@ -8,18 +8,16 @@ import { useNavigation } from '@react-navigation/native'
  * 
  * @param {Number, Number} correct percentage and incorrect answer percentages 
  */
-export default function ResultPage({route}){
+export default function ResultPage({ip, cp, reset}){
    const navigation = useNavigation()
-   
-   const {correctPercentage, incorrectPercentage, deck} = route.params
-    console.log(route.params)
+
     return <View style={[styles.center, {backgroundColor: color.pink}]}>
                 <View style={[styles.glass, {padding: 64}]}>
-                    <Text style={styles.title}>Correct {correctPercentage}%</Text>
-                    <Text style={styles.title}>Incorrect {incorrectPercentage}%</Text>
+                        <Text style={styles.title}>Correct {cp}%</Text>
+                        <Text style={styles.title}>Incorrect {ip}%</Text>
                 </View>
                 <SubmitButton onPress={()=>navigation.navigate("stacks", {screen: 'detail'})} label={'Go Back '} color='orange'/>
-                <SubmitButton onPress={()=>navigation.navigate("stacks", {screen: 'Quiz', params:{reset:true, deck}})} 
+                <SubmitButton onPress={reset} 
                     label={'Restart A Quiz'} 
                     color={color.textBlack}/>
             </View>
