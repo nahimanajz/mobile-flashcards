@@ -1,22 +1,28 @@
 import { StatusBar } from 'expo-status-bar'
-import React from 'react'
-import { View } from 'react-native'
+import React, { useEffect } from 'react'
+import { View} from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import BottomNavs from './navs/BottomNavs'
 
-import { notification } from './utils/notification'
+import { scheduleAndCancel } from './utils/notification'
+import { checkSolvedQuestions } from './utils/data'
 
 export default function App() {
-  //useEffect(() =>notification()) //NRoticiation will popup only if user logged no data at that day
+  //useEffect(() =>) //NRoticiation will popup only if user logged no data at that day
+  useEffect(() =>{    
+    checkSolvedQuestions().then((res) =>{      
+      if(res.notify){
+        scheduleAndCancel()
+      }
+    }).catch(err =>console.log(err))
+  })
   return (
     <View style={{flex: 1}}>
       <SafeAreaProvider>         
-          <BottomNavs />          
+          <BottomNavs />         
           
       </SafeAreaProvider>
     </View>
   )
 
 }
-
-

@@ -4,6 +4,7 @@ import { SubmitButton } from "../components/SubmitButton"
 import { styles } from "../utils/styles"
 import * as color from '../utils/colors'
 import ResultPage from "./ResultPage"
+import { saveResult } from "../utils/data"
       /**
          * TODO: do a backend to keep solved questions [add timestamp, inorder to decide when to send notification]
          *  Return result page if allquestions are corrected and append reset prop
@@ -41,21 +42,15 @@ export function QuizPage({route, navigation}){
         
         if(correctAnswer + incorrectAnswer === countDeckQuestion){
             setShowResults(true)
-            // Set Result in backend
-            // Finaly check if user logged no data then retrieve notification
-            // {
-            //     deck:
-            //     result:[
-            //         correct?.integer, 
-            //         incorrect?.integer
-            //         timestamp?.time:
-            //     ]
-            // }
-        }
-        
+            saveResult(deck.title, correctAnswer, incorrectAnswer).then(res=>{
+                console.log(`${JSON.stringify(res)}`)
+            }).catch(err=>console.log(err));
+            
+        }  
     },[count,incorrectAnswer, correctAnswer,showResults])
       
     if(showResults){
+        
                 
         return (
             <ResultPage 
@@ -69,7 +64,7 @@ export function QuizPage({route, navigation}){
 
     return (<View style={styles.center}>            
 
-            {(deck && deck.questions.length) ? (
+            {(deck.questions && deck.questions.length) ? (
                 <>
                     <View>
                         <Text>{count+1}/ {countDeckQuestion}</Text>

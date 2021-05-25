@@ -28,7 +28,7 @@ export let decks = {
 
 /**
  * @Description  get all from local storage 
- * @return {Object} 
+ * @return {Object} decks 
  */
 export const getDecks= async() => {
 try {
@@ -110,9 +110,37 @@ export const getDeck= async (id)=>{
       const dks = await getDecks()
       delete dks[title]
       return await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dks))
-      q
+      
   } catch (error) {
     return console.log("From delete database", error);
   }
   
+ }
+ /**
+  * @param { String, Float, Float } title of deck w're going to save it's result'
+  * @description deck, date, and correct percentage and incorrect percentages
+  * @return { Boolean } We will check it true to show notification
+  */
+ export const saveResult = async (deck, cp,ip) => {
+   try {
+      const result = {
+        [deck]:{
+          timestamp: new Date().toLocaleDateString(),     
+          cp,
+          ip,
+        }
+      }
+      return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(result))
+   } catch (error) {
+     console.log(error)
+   }
+ }
+ /**
+  * @param {*} get all decks and check if there is loggedData
+  */
+ export const checkSolvedQuestions = async () =>{
+   const decks = await getDecks();   
+   const loggedData = Object.values(decks).some(deck=> deck.timestamp && deck.timestamp === new Date().toLocaleDateString())
+ 
+   return {notify:loggedData?false:true}
  }

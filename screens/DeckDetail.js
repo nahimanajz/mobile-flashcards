@@ -11,11 +11,14 @@ export function DeckDetail ({route, navigation}){
     const [deck, setDeck] = useState(route.params.deck)
 
     const {title, questions} = deck
-   useEffect(()=>{           
-        if(route.params.card){       
+
+   useEffect(()=>{     
+
+        if(route.params.card){  
+           
           setDeck({
             ...deck,                    
-                questions: deck.questions.concat(route.params.card)
+                questions: deck.questions ? deck.questions.concat(route.params.card): [].concat(route.params.card)
         })
         }
    },[route.params.card])

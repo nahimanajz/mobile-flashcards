@@ -4,11 +4,14 @@ import { TouchableOpacity } from "react-native-gesture-handler"
 import {styles} from '../utils/styles'
 import {Card} from 'react-native-shadow-cards'
 import {getDecks} from '../utils/data'
+import { notification } from '../utils/notification'
 
 export function Dashboard({navigation}){
-  
+    
+    
     const[decks, setDecks] = useState({})
     useEffect(() =>{
+
         getDecks().then(newDecks =>{
             if(newDecks){
                 if(Object.keys(newDecks) !== Object.keys(decks)){
@@ -17,15 +20,16 @@ export function Dashboard({navigation}){
             }
               
           }).catch(err =>console.log(`From dashboard:${err.message}`))
+  
+
     }, [decks])
     const data = Object.values(decks)
-    
     return (
         <ScrollView style={styles.dashboard}>            
             {
                  data.map((deck) => deck && (                  
-                <Card style={[styles.dash]}>
-                    <Text style={[styles.title]} key={deck.title}>{deck.title}</Text>
+                <Card style={[styles.dash]} key={deck.title}>
+                    <Text style={[styles.title]}>{deck.title}</Text>
                         <TouchableOpacity 
                             onPress={()=> navigation.navigate("stacks", {
                                         screen:'detail',
@@ -35,7 +39,7 @@ export function Dashboard({navigation}){
                                             }
                                         })}
                                         >
-                        <Text style={[styles.subtitle]}>{deck.questions.length} Cards</Text>
+                        <Text style={[styles.subtitle]}>{deck.questions && deck.questions.length} Cards</Text>
                     </TouchableOpacity>
                 </Card>
                 ))

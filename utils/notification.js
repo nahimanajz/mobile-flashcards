@@ -6,30 +6,34 @@
  * 
  *  */ 
 
- export  function notification(){
-    Notifications.setNotificationHandler({
+ export async function scheduleAndCancel(){
+    await Notifications.setNotificationHandler({
         handleNotification: async ()=>({
-           shouldPlaySound: true,
+           shouldPlaySound: false,
            shouldShowAlert: true,
-           shouldSetBadge: true
-        })
-    })
+           shouldSetBadge: false
+        }),
+    });
 
+   let date = new Date()
+   date.setDate(date.getDate() + 1)
+   date.setHours(1)
+   await Notifications.cancelAllScheduledNotificationsAsync()
 
-   const notify =  Notifications.scheduleNotificationAsync({
+    await Notifications.scheduleNotificationAsync({
         content: {
             title:'Hi Remember to set  new Deck and it\'s cards',
-            body: 'As you want to play, You really have to set card on you chosen deck'
+            body: 'As you want to play, You really have to set card on you chosen deck',
+            data: {data: 'notified'}
         },
-        ios: {sounds:true},
+        
+        ios: { sounds:true },
         android: {sounds:true, priority:'high', vibrate:true},    
-        trigger:null
+        trigger: {
+            time:date ,
+            repeat: 'day'
+        }
        
     })
-    Notifications.cancelAllScheduledNotificationsAsync(notify)
-    nextTrigger()
  }
- 
- function nextTrigger (){
-  return Notifications.getNextTriggerDateAsync({hour: 3, minute:1})
- }
+
