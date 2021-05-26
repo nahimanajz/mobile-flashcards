@@ -33,7 +33,6 @@ export function QuizPage({route, navigation}){
         }
       }
     const reset=()=>{
-        //setCount(0)
         setShowResults(false)
         setCorrectAnswer(0)
          setIncorrectAnswer(0)

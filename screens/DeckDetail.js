@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Text, View } from "react-native"
+import React, { useEffect, useRef, useState } from 'react'
+import { Animated, Text, View } from "react-native"
 import { SubmitButton } from '../components/SubmitButton'
 import { styles } from '../utils/styles'
 import * as color from '../utils/colors'
@@ -9,21 +9,20 @@ export function DeckDetail ({route, navigation}){
     
     //TODO: Show answer, Calculate Point of User who did a Quiz
     const [deck, setDeck] = useState(route.params.deck)
-
     const {title, questions} = deck
+    const animateValue = useRef( new Animated.Value(0)).current
 
-   useEffect(()=>{     
 
+   useEffect(()=>{    
         if(route.params.card){  
-           
           setDeck({
             ...deck,                    
                 questions: deck.questions ? deck.questions.concat(route.params.card): [].concat(route.params.card)
         })
         }
+        animate()
    },[route.params.card])
-    const onAddCard =() =>{     
-        //set hook in this funtion 
+    const onAddCard =() =>{    
         navigation.navigate('AddCard',{
             deckTitle: title, 
        }) 
@@ -37,15 +36,22 @@ export function DeckDetail ({route, navigation}){
         }).catch(err => console.error(err))
        
     }   
+    const animate =() => (       
+        Animated.timing(animateValue, {
+            toValue: 90,
+            delay: 2000,            
+            useNativeDriver: true,
+          }).start()
+    )
+
     return(<>
         {
             title &&(
                 <View style={styles.container}>            
-                    <View>
+                    <Animated.View style={{transform: [{ translateY: animateValue }]}}>
                         <Text style={styles.title}> {title} </Text>
                         <Text style={styles.subtitle}> {questions? questions.length: 0} </Text>
-                        
-                    </View>
+                    </Animated.View>
                     <View>
                         <SubmitButton label={"Add card"} onPress={onAddCard}  color={`${color.darkPink}`}/>
                         <SubmitButton label={"Start Quiz"} onPress={onStartQuiz} color={`${color.purple}`} />

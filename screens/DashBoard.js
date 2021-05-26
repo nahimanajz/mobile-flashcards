@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
-import {View, Text,ScrollView} from 'react-native'
+import { Text,ScrollView} from 'react-native'
 import { TouchableOpacity } from "react-native-gesture-handler"
 import {styles} from '../utils/styles'
 import {Card} from 'react-native-shadow-cards'
 import {getDecks} from '../utils/data'
-import { notification } from '../utils/notification'
+
 
 export function Dashboard({navigation}){
     
@@ -16,6 +16,7 @@ export function Dashboard({navigation}){
             if(newDecks){
                 if(Object.keys(newDecks) !== Object.keys(decks)){
                     setDecks(newDecks)
+                   
                   }
             }
               

@@ -8,7 +8,7 @@ import { scheduleAndCancel } from './utils/notification'
 import { checkSolvedQuestions } from './utils/data'
 
 export default function App() {
-  //useEffect(() =>) //NRoticiation will popup only if user logged no data at that day
+  
   useEffect(() =>{    
     checkSolvedQuestions().then((res) =>{      
       if(res.notify){

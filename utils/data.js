@@ -33,9 +33,7 @@ export let decks = {
 export const getDecks= async() => {
 try {
     const allDecks = await AsyncStorage.getItem(STORAGE_KEY)  
-  //console.log(JSON.stringify(allDecks))
-  // return allDecks
-    return JSON.parse(allDecks) //JSON.parse(allDecks);
+    return JSON.parse(allDecks) 
 } catch (error) {
     console.log(error)
 }

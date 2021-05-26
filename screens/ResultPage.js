@@ -4,6 +4,7 @@ import { SubmitButton } from "../components/SubmitButton"
 import { styles } from "../utils/styles"
 import * as color from '../utils/colors'
 import { useNavigation } from '@react-navigation/native'
+
 /**
  * 
  * @param {Number, Number} correct percentage and incorrect answer percentages 

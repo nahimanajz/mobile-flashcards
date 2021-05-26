@@ -1,10 +1,8 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { AddDeck } from '../screens/AddDeck'
 import { Dashboard } from '../screens/DashBoard'
 import { NavigationContainer } from '@react-navigation/native';
 import{Ionicons,FontAwesome } from '@expo/vector-icons'
-
 import * as color from '../utils/colors';
 import { StackNavs } from './StackNavs';
 

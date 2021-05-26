@@ -1,25 +1,19 @@
-import React,{useEffect, useState} from "react"
+import React,{useState} from "react"
 import {View, Text, Image} from 'react-native'
 import { styles } from "../utils/styles"
-import{FontAwesome } from '@expo/vector-icons'
 import { EditText } from "../components/EditText"
 import { SubmitButton } from "../components/SubmitButton"
-import { useNavigation } from '@react-navigation/native'
 import * as color from '../utils/colors'
-import { getDeck, saveDeck } from '../utils/data'
+import {saveDeck } from '../utils/data'
 
 export function AddDeck({navigation}){
     const [deck, setDeck] = useState({title:''});
     
     const submitInfo =() => { 
-        // Redirect To DECK CREATED WITH created deck  
-  
-        saveDeck(deck.title).then(()=>{            
-            navigation.navigate("stacks",{screen: 'detail', params:{deck}})
+        saveDeck(deck.title).then(()=>{           
+           navigation.navigate("Decks") 
         }).catch(err =>console.log(err))
-    
     }
-    //TODO: User clicks on add button should be taken to that deck detail
     return (
         <View style={styles.container}>
             <View>
